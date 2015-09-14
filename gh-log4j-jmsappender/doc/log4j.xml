@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="false">
+
+	<!-- An Asynchronous JMS Appender -->
+	<appender name="GEORGE-JMS" class="george.log4j.jmsappender.JMSAppender">
+		<param name="InitialContextFactoryName" value="org.apache.activemq.jndi.ActiveMQInitialContextFactory" />
+		<param name="ProviderURL" value="tcp://myJmsServer:61616" />
+		<param name="TopicBindingName" value="logTopic" />
+		<param name="JmsTopic" value="logTopic" />
+		<param name="TopicConnectionFactoryBindingName" value="ConnectionFactory" />
+		
+		<!--  These are optional -->
+		<param name="UserName" value="" />
+		<param name="Password" value="" />
+	</appender>
+		
+	<category name="event" additivity="false">
+		<priority value="info" />
+		<appender-ref ref="GEORGE-JMS" />
+	</category>
+
+	<root>
+		<priority value="debug" />
+	</root>
+</log4j:configuration>
